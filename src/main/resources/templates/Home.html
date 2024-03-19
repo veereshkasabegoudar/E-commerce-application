@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VBK E-Commerce Website</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 1px 20px;
+            text-align: center;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #555;
+            padding: 10px 0;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 20px;
+            margin: 0 10px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            background-color: #777;
+        }
+       
+    
+        .alignment h2{
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            color: green;
+
+        }
+        .alignment p{
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+          
+        }
+        footer {
+			background-color: #343a40;
+			color: #ffffff;
+			padding: 15px;
+			position: fixed;
+			bottom: 0;
+			width: 100%;
+			text-align: center;
+		}
+		.alert.alert-success {
+    color: green;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+    
+    padding: 20px;
+   
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.alert.alert-danger {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+   
+    padding: 20px;
+   
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+		
+		
+		
+		
+		
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>MYSHOP</h1>
+    </header>
+
+    <nav>
+        <a href="/">Home</a>
+        <a href="/products">products</a>
+        <th:block th:if="${session.customer==null}">
+        <a href="/signin">Signin</a>
+        <a href="/signup">Signup</a>
+        </th:block>
+        <th:block th:if="${session.customer}">
+				<th:block th:if="${session.customer.role=='ADMIN'}">
+        <a href="/admin">Admin Dashboard</a>
+         </th:block>
+          <a href="/cart">Cart</a>
+           <a href="/orders">View All Orders</a>
+         <a href="/logout">Logout</a>
+         </th:block>
+        
+        <!-- Add more links as needed -->
+    </nav>
+    <div class="alert alert-success" th:if="${session.successMessage}" role="alert" th:text="${session.successMessage}">
+	</div>
+	<div class="alert alert-danger" th:if="${session.failMessage}" role="alert" th:text="${session.failMessage}">
+	</div>
+	<th:block th:text="${@sessionMessageRemover.removeMessage()}"></th:block>
+    
+
+    
+	<div class="alignment">
+		<h2>Welcome to VBKMyShop!</h2>
+        
+		<p>Discover a wide range of products and enjoy secure online shopping.</p>
+	</div>
+
+    <footer class="py-3 text-center"> &copy; 2024 VBKMyShop </footer>
+
+</body>
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="ISO-8859-1">
+  <title>Admin Dashboard</title>
+
+  <style>
+   body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            text-align: center;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #555;
+            padding: 10px 0;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 20px;
+            margin: 0 10px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            background-color: #777;
+        }
+       
+     /*   footer  {
+			background-color: #343a40;
+            align-items: center;
+            display: flex;
+            justify-content: center;
+			color: #ffffff;
+			padding: 15px;
+			
+			bottom: 0;
+			width: 100%;
+		}*/
+        .alignment h2{
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            color: green;
+
+        }
+        .alignment p{
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+          
+        }
+        
+         .container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    color: #28a745;
+}
+
+/* Add styles for Add Product and Manage Products buttons */
+.container a.btn {
+    display: inline-block;
+    margin: 10px;
+    padding: 10px 20px;
+    text-decoration: none;
+    color: #fff;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.container a.btn-success {
+    background-color: #28a745;
+}
+
+.container a.btn-secondary {
+    background-color: #6c757d;
+}
+.alert.alert-success {
+    color: green;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+    
+    padding: 20px;
+   
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.alert.alert-danger {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+   
+    padding: 20px;
+   
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+     
+    </style>
+  
+</head>
+<body>
+
+    <header>
+        <h1>MYSHOP</h1>
+    </header>
+
+    <nav>
+        <a href="/">Home</a>
+        <a href="/products">products</a>
+        <th:block th:if="${session.customer==null}">
+        <a href="/signin">Signin</a>
+        <a href="signup">Signup</a>
+        </th:block>
+        <th:block th:if="${session.customer}">
+				<th:block th:if="${session.customer.role=='ADMIN'}">
+        <a href="/admin">Admin Dashboard</a>
+         </th:block>
+        <a href="cart">Cart</a>
+        <a href="/orders">View All Orders</a>
+         <a href="/logout">Logout</a>
+         </th:block>
+        
+        <!-- Add more links as needed -->
+    </nav>
+    <div class="alert alert-success" th:if="${session.successMessage}" role="alert" th:text="${session.successMessage}">
+	</div>
+	<div class="alert alert-danger" th:if="${session.failMessage}" role="alert" th:text="${session.failMessage}">
+	</div>
+	<th:block th:text="${@sessionMessageRemover.removeMessage()}"></th:block>
+    
+    
+     <div class="container mt-4">
+        <h2>Welcome to Admin Dashboard!</h2>
+        <div>
+            <a href="/admin/add-product" class="btn btn-success">Add Product</a>
+            <a href="/admin/manage-products" class="btn btn-secondary">Manage Products</a>
+        </div>
+    </div>
+
+   
+    
+
+ 
+</body>
+</html>
